@@ -1,0 +1,121 @@
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+            justify-content: space-between;
+        }
+        .header .back-button, .header .menu {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        .header .back-button {
+            margin-right: auto;
+        }
+
+        /* Main layout */
+        .editor-container {
+            display: flex;
+            padding: 20px;
+            gap: 20px; /* Adds space between editor and sidebar */
+        }
+        .editor {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .editor .title-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 24px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+            outline: none;
+        }
+        .quill-editor-container {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #ffffff;
+            height: 300px;
+            margin-top: 10px;
+        }
+        .sidebar {
+            width: 300px;
+            background-color: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            padding-right: 30px; /* Adds more space on the right */
+        }
+
+        /* Sidebar Title */
+        .sidebar h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ff5722;
+            padding-bottom: 5px;
+        }
+
+        /* Form elements inside the sidebar */
+        .setting {
+            margin-bottom: 15px;
+        }
+        .setting label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .setting input, .setting textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+        .setting input:focus, .setting textarea:focus {
+            border-color: #ff5722;
+        }
+
+        /* Date input layout */
+        .setting .date {
+            display: flex;
+            justify-content: space-between;
+        }
+        .setting .date input {
+            width: 48%;
+        }
+
+        /* Publish button styling */
+        .publish-button {
+            background-color: #ff5722;
+            color: #ffffff;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .publish-button:hover {
+            background-color: #e64a19;
+        }

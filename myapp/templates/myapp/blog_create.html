@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Editor</title>
+    
+    <!-- Include Quill stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/blog_create.css' %}">
+</head>
+<body>
+    <!-- Header with home and menu buttons -->
+    <header class="header">
+        <nav class="home-button">
+            <a href="{% url 'index' %}" class="home-link">
+                <i class="fas fa-home"></i> Home
+            </a>
+        </nav>
+        <div class="menu"><i class="fas fa-ellipsis-v"></i></div>
+    </header>
+    
+    <!-- Main editor container -->
+    <div class="editor-container">
+        <!-- Editor section -->
+        <div class="editor">
+            <input type="text" id="title" class="title-input" placeholder="Title">
+            <div id="quill-editor" class="quill-editor-container"></div>
+        </div>
+        
+        <!-- Sidebar with publish and settings options -->
+        <div class="sidebar">
+            <button onclick="saveBlog()" class="publish-button">Publish</button>
+            <div class="post-settings">
+                <h3>Post settings</h3>
+                
+                <div class="setting">
+                    <label for="labels">Labels</label>
+                    <input type="text" id="labels" placeholder="Separate labels by commas">
+                </div>
+                
+                <div class="setting">
+                    <label>Published on</label>
+                    <div class="date">
+                        <input type="date" id="publishDate">
+                        <input type="time" id="publishTime">
+                    </div>
+                </div>
+                
+                <div class="setting">
+                    <label for="permalink">Permalink</label>
+                    <input type="text" id="permalink" placeholder="Permalink">
+                </div>
+                
+                <div class="setting">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="Location">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Quill JavaScript -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+    <!-- Blog editor JavaScript -->
+    <script>
+        // Initialize Quill editor
+        const quill = new Quill('#quill-editor', {
+            theme: 'snow',
+            placeholder: 'Write your post...',
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link', 'image'],
+                    ['clean']
+                ]
+            }
+        });
+
+        // Set the current date and time as the default for the inputs
+        const currentDate = new Date();
+        const currentDateString = currentDate.toISOString().split('T')[0];
+        const currentTimeString = currentDate.toTimeString().split(' ')[0];
+
+        document.getElementById('publishDate').value = currentDateString;
+        document.getElementById('publishTime').value = currentTimeString;
+
+        //   Save blog post to the database using fetch()
+        async function saveBlog() {
+            const title = document.getElementById("title").value;
+            const content = quill.root.innerHTML;  // Get HTML content from Quill editor
+            const labels = document.getElementById("labels").value;
+            const publishDate = document.getElementById("publishDate").value;
+            const publishTime = document.getElementById("publishTime").value;
+            const permalink = document.getElementById("permalink").value;
+            const location = document.getElementById("location").value;
+
+            // Validate that title and content are not empty
+            if (!title.trim() || !content.trim()) {
+                alert("Title and content cannot be empty.");
+                return;
+            }
+
+            // Create a blog object to send to backend
+            const blogPost = {
+                title,
+                content,
+                labels,
+                publishDate,
+                publishTime,
+                permalink,
+                location
+            };
+
+            try {
+                const response = await fetch("{% url 'save_blog' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCSRFToken()
+                    },
+                    body: JSON.stringify(blogPost)
+                });
+
+                const data = await response.json();
+
+                if (data.status === "success") {
+                    alert("Blog published successfully!");
+                    window.location.href = "{% url 'blogs' %}";
+                } else {
+                    alert(`Error: ${data.message}`);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Failed to publish blog.");
+            }
+        }
+
+        function getCSRFToken() {
+            return document.cookie.split('; ')
+                .find(row => row.startsWith('csrftoken='))
+                ?.split('=')[1];
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>A Blog For Gamers By Gamers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font awesome icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+
+
+  <body>
+
+
+
+    <!-- header -->
+    <header>
+      <nav class="navbar">
+        <div class="container">
+          <a href="{% url 'index' %}" class="navbar-brand" style=" text-transform: uppercase;
+">
+            {% if request.user.is_authenticated %}
+                Welcome, {{ request.user.username }}
+            {% else %}
+                For Gamers By Gamers
+            {% endif %}
+        </a>
+        
+            <div class="navbar-nav">
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'blog_create' %}">Create</a>
+                <a href="{% url 'blogs' %}">Blogs</a>
+                <a href="https://atharv3142m.github.io/About-The-Developers/">About</a>
+
+                {% if request.user.is_authenticated %}
+                <!-- If user is logged in -->
+               
+                
+                    <div >
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+                {% else %}
+                <!-- If user is not logged in -->
+                <a href="{% url 'login' %}">Login/Signup</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+      <div class="banner">
+        <video autoplay loop muted class="banner-video" id="bannerVideo">
+            <source src="{% static 'images/banner-bg.mp4' %}" type="video/mp4"
+            srcset="{% static 'images/banner-bg-low.mp4' %} 480w,
+                    {% static 'images/banner-bg-medium.mp4' %} 768w,
+                    {% static 'images/banner-bg-high.mp4' %} 1080w" 
+            sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, 1080px">
+        </video>
+    </div>
+
+<script>
+    // Check if the browser is Firefox on Android
+    var isFirefoxAndroid = /Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent) && /Android/.test(navigator.userAgent);
+    
+    if (isFirefoxAndroid) {
+        var video = document.getElementById('bannerVideo');
+        video.setAttribute('playsinline', ''); // Attempt to enable inline play
+        video.play(); // Play video if needed
+    }
+</script>
+        <div class="container">
+          <h1 class="banner-title">
+            <span>A Blog</span> For Gamers By Gamers
+          </h1>
+          
+        </div>
+        <div style="min-height: 100px; margin: 30px;"></div>
+      </div>
+    </header>
+    <!-- end of header -->
+    
+    <!-- design -->
+    <section class = "design" id = "design">
+      <div class = "container">
+        <div class = "title">
+          <h2>Recent Gaming News And More..!</h2>
+          <br>
+          <p>Recent News , Tips & Tricks</p>
+        </div>
+        <br>
+
+
+        <div class = "design-content">
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <a href = "https://www.pcgamesn.com/silent-hill-2/remake-review#:~:text=The%20Silent%20Hill%202%20remake%20is%20a%20solid%2C,take%20away%20from%20the%20original%27s%20claustrophobia%20and%20fear." target="_blank"><img src = "{% static 'images/art-design-1.jpg' %}"alt = ""></a>
+              <span><i class = "far fa-heart"></i> 90</span>
+              <span>For Gamers By Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "https://www.pcgamesn.com/silent-hill-2/remake-review#:~:text=The%20Silent%20Hill%202%20remake%20is%20a%20solid%2C,take%20away%20from%20the%20original%27s%20claustrophobia%20and%20fear.">Silent Hill 2 Remake (2024) - Review</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <img src="{% static 'images/art-design-2.jpg' %}" alt = "">
+              <span><i class = "far fa-heart"></i> 22</span>
+              <span>For Gamers By Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "https://freetokeep.gg/">Free PC Games This Week: Epic Games Is Offering ....</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <img src="{% static 'images/art-design-3.jpg' %}" alt="">
+              <span><i class = "far fa-heart"></i> 87</span>
+              <span>For Gamers By Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "https://gameworldobserver.com/2024/05/16/manor-lords-sales-2-million-copies-vs-other-indie-games#:~:text=The%20city%20builder%20has%20already%20sold%20over%202,Manor%20Lords%20so%20quickly%20has%20exceeded%20even%20those.%E2%80%9D">Manor Lords Sells 2 Million Copies in Just Three Weeks, Exceeding Publisher's 'Wild Hopes'</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <a><img src="{% static 'images/art-design-4.jpg' %}" alt = ""></a>
+              <span><i class = "far fa-heart"></i> 76</span>
+              <span>For Gamers By Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "https://www.ign.com/articles/as-stardew-valley-16-finally-hits-console-and-mobile-169-patch-notes-reveal-further-changes">Stardew Valley’s big 1.6 update is out on mobile and consoles, but everyone’s getting a helpful patch</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <img src="{% static 'images/art-design-5.jpg' %}" alt = "">
+              <span><i class = "far fa-heart"></i> 83</span>
+              <span>For Gamers By Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "https://me.ign.com/en/pc/168994/feature/the-witcher-3-beginners-guide-and-essential-tips-maps-witcher-gear-and-more">The Witcher 3 Beginner's Guide and Essential Tips: Maps, Witcher Gear, and More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <img src="{% static 'images/art-design-6.jpg' %}" alt = "">
+              <span><i class = "far fa-heart"></i> 72</span>
+              <span>For Gamers By Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "https://valorantesports.com/en-SG/news/valorant-challengers-2025-apac-overview">Valorant: Riot Games Reveals Details Regarding 2025 Challengers APAC Tournament</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+        </div>
+      </div>
+    </section>
+    <!-- end of design -->
+
+
+    <!-- blog -->
+    <section class = "blog" id = "blog">
+      <div class = "container">
+        <div class = "title">
+          <h2>Latest Blog</h2>
+          <br>
+          <p>recent blogs about gaming culture</p>
+        </div>
+        <div class = "blog-content">
+
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src="{% static 'images/blog-p-1.jpg' %}" alt = "">
+              <span><i class = "far fa-heart">99</i></span>
+            </div>
+            <div class = "blog-text">
+              <span>20 January, 2024</span>
+              <h2>New Game Rocks the World</h2>
+              <p>The newly launched game,"Black Myth Wukong" continues to amaze gamers all around the World</p>
+              <a href = "https://www.globaltimes.cn/page/202408/1318391.shtml">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src="{% static 'images/blog-p-2.jpg' %}" alt = "">
+              <span><i class = "far fa-heart">169</i></span>
+            </div>
+            <div class = "blog-text">
+              <span>20 October, 2024</span>
+              <h2>GTA 6</h2>
+              <p>GTA 6: Everything We Know - News, Leaks, and Pre-Trailer Intel</p>
+              <a href = "https://www.ign.com/articles/gta-6-everything-we-know-news-leaks-and-pre-trailer-intel">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src="{% static 'images/blog-p-3.jpg' %}"alt = "">
+              <span><i class = "far fa-heart">56</i></span>
+            </div>
+            <div class = "blog-text">
+              <span>06 November, 2024</span>
+              <h2>You May Have Overlooked One Of 2024’s Most Impressive Horror Games</h2>
+              <p>In a crowded year for releases, Mouthwashing still deserves your attention</p>
+              <a href = "https://www.msn.com/en-us/entertainment/gaming/you-may-have-overlooked-one-of-2024-s-most-impressive-horror-games/ar-AA1tz54q">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src="{% static 'images/blog-p-4.jpg' %}" alt = "">
+              <span><i class = "far fa-heart">87</i></span>
+            </div>
+            <div class = "blog-text">
+              <span>24 February, 2024</span>
+              <h2>Stop Doomscrolling And Check Out These Five Relaxing Games</h2>
+              <p>Desperately in need of a breather? Here are some games to bliss out to</p>
+              <a href = "https://kotaku.com/best-relaxing-game-stardew-valley-tetris-effect-ffxiv-1851689961">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src="{% static 'images/blog-p-5.jpg' %}" alt = "">
+              <span><i class = "far fa-heart">45</i></span>
+            </div>
+            <div class = "blog-text">
+              <span>20 March, 2024</span>
+              <h2>New Test Drive Is So Bad Players Are Getting A Free Car As An Apology</h2>
+              <p>The devs behind the unpopular open-world racing game aren't giving up on Solar Crown</p>
+              <a href = "https://kotaku.com/test-drive-patch-notes-free-car-unlimited-solar-crown-1851689819#:~:text=Earlier%20this%20year%2C%20Test%20Drive%20Unlimited%3A%20Solar%20Crown,players%20are%20being%20given%20a%20single%20free%20car.">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src="{% static 'images/blog-p-6.jpg' %}" alt = "">
+              <span><i class = "far fa-heart">69</i></span>
+            </div>
+            <div class = "blog-text">
+              <span>20 April, 2024</span>
+              <h2>Seven Years Later, Fortnite Is A Better Game Than It's Ever Been</h2>
+              <p>Whether you're looking for something to do with your kid, or are tired of Fortnite FOMO, the game's seven-year anniversary is the perfect time to give it a try</p>
+              <a href = "https://kotaku.com/how-parents-can-get-started-in-fortnite-1851688072">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+
+        </div>
+      </div>
+    </section>
+    <!-- end of blog -->
+
+
+    <!-- about -->
+    <section class = "about" id = "about">
+      <div class = "container">
+        <div class = "about-content">
+          <div class = "about-text">
+            <div class = "title">
+              <h2>The Coding Pirates</h2>
+                <div>
+                  <img src="{% static 'images/about-bg.jpg' %}" alt = "logo-thecodingpirates">
+                </div>
+              <p><b>About The Coding Pirate's</b></p>
+            </div>
+              <p>Welcome to The Coding Pirate's, a collective of enthusiastic gamers and coders passionate about both gaming and technology. Our team includes four members: Atharv, Shivansh, Suraj, and Mayuresh. Each of us brings unique skills and perspectives to the table. Atharv, Shivansh, and Suraj are avid gamers, diving into different genres and trends, while Mayuresh contributes his expertise in coding as our non-gamer with a fresh perspective.</p>
+              <p>Our project, created using HTML, CSS, and JavaScript, with Django linking it all together, is a dedicated platform for gaming blogs. Here, we cover everything from game reviews to insights into the latest releases, and we share our own experiences and tips to enhance your gaming journey. This platform is designed to be interactive, user-friendly, and full of the insights every gamer craves.</p>
+              <p>Join us as we explore the world of gaming with our passion for coding. Whether you're here for the gaming insights or the tech behind it, The Coding Pirate's welcomes you aboard!</p>
+            </div>
+        </div>
+      </div>
+    </section>
+    <!-- end of about -->
+
+
+    <!-- footer -->
+    <footer>
+      <div class="social-links">
+        <a href="https://www.instagram.com/the_coding_pirates_/" target="_blank" rel="noopener noreferrer" title="Follow us on Instagram"><i class="fab fa-instagram"></i> </a>
+        <a href="https://www.youtube.com/channel/UC1kf6Eeuofu3eP8Ff5VRmow" target="_blank" rel="noopener noreferrer" title="Follow us on YouTube"><i class="fab fa-youtube"></i> </a>
+        <a href="https://discord.com/channels/1306158150025744395/1306158150877057048" target="_blank" rel="noopener noreferrer" title="Join our Discord"><i class="fab fa-discord"></i> </a>
+      </div>
+      <span>&copy; 2024 Gamers Page. All rights reserved.</span>
+    </footer>
+    <!-- end of footer -->
+
+  </body>
+</html>
+

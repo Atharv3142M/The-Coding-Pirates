@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Blogs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/blogs.css' %}">
+</head>
+<body>
+
+<!-- Header with home and menu buttons -->
+<header class="header">
+    <nav class="home-button">
+        <a href="{% url 'index' %}" class="home-link">
+            <i class="fas fa-home"></i> Home
+        </a>
+    </nav>
+    <div class="menu">
+        <i class="fas fa-ellipsis-v"></i>
+        <div class="dropdown-menu">
+            <a href="{% url 'blog_create' %}">Create New Blog</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+</header>
+
+<!-- Main Title -->
+<h1>All Blogs</h1>
+
+<!-- Container for all blogs -->
+<main id="blogsContainer">
+    {% for blog in blogs %}
+    <div class="blog-item">
+        <div class="blog-text">
+            <span>
+                <b>Posted by: {{ blog.author.username }}</b>
+                {% if blog.author.userprofile.avatar %}
+                <img src="{{ blog.author.userprofile.avatar.url }}" alt="Profile Pic" class="profile-pic">
+                {% endif %}
+            </span>
+            <h2>{{ blog.title }}</h2>
+            <p>{{ blog.content|safe }}</p>
+            <small>Published on: {{ blog.created_at|date:"F d, Y" }}</small>
+        </div>
+    </div>
+    {% empty %}
+    <p>No blogs posted yet.</p>
+    {% endfor %}
+</main>
+
+<!-- CSS Styling -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    .header {
+        background-color: #1a1a1a;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 3px solid #ff6600;
+    }
+
+    .home-link {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        transition: color 0.3s ease;
+    }
+
+    .home-link i {
+        margin-right: 8px;
+        font-size: 20px;
+    }
+
+    .home-link:hover {
+        color: #ff6600;
+    }
+
+    h1 {
+        text-align: center;
+        color: #ff6600;
+        margin-top: 20px;
+    }
+
+    #blogsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .blog-item {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+    .blog-item:hover {
+        transform: translateY(-3px);
+    }
+
+    .blog-text span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 5px;
+    }
+
+    .profile-pic {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ff6600;
+    }
+
+    h2 {
+        font-size: 22px;
+        color: #333;
+        margin-top: 0;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    small {
+        display: block;
+        margin-top: 10px;
+        color: #888;
+        font-size: 14px;
+    }
+
+    /* Dropdown Styling */
+    .menu {
+        position: relative;
+        cursor: pointer;
+        color: #fff;
+        font-size: 20px;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        right: 0;
+        top: 30px;
+        width: 150px;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 10;
+    }
+
+    .dropdown-menu a {
+        color: #fff;
+        padding: 10px;
+        display: block;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: #ff6600;
+    }
+
+    .menu:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .menu {
+            margin-top: 10px;
+        }
+    }
+</style>
+
+</body>
+</html>

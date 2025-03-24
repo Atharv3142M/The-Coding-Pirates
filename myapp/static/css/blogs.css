@@ -1,0 +1,94 @@
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header .back-button, .header .home-button {
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+            margin-right: auto;
+        }
+
+        .header .menu {
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Main Title */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Blogs container */
+        #blogsContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Individual blog card styles */
+        .blog {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 10px 0;
+            width: 80%; /* Responsive width */
+            max-width: 800px; /* Limit maximum width */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .banner-image {
+            max-width: 10%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            margin-right: 60px;
+        }
+
+        h2 {
+            margin: 0;
+            color: #ff5722; /* Title color */
+            font-size: 1.5em;
+        }
+
+        p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 1em;
+        }
+
+        .timestamp {
+            font-size: 0.9em;
+            color: #999; /* Lighter color for timestamps */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #blogsContainer {
+                padding: 10px;
+            }
+
+            .blog {
+                width: 95%; /* Full width on smaller screens */
+            }
+
+            .header {
+                padding: 10px;
+            }
+        }
